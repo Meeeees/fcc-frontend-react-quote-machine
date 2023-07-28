@@ -37,19 +37,20 @@ class App extends React.Component {
   }
   render() {
     let quote = this.state.quotes[this.state.RandomQuote]
-
+    let TwitterintentLink = 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + quote.quote + '" ' + quote.author)
+    let TumblrintentLink = 'https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption=' + encodeURIComponent(quote.author) + '&content=' + encodeURIComponent(quote.quote) + '&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button'
     return (
       <div className="App text-center items-center flex justify-center h-screen" style={{ backgroundColor: this.state.RandomColor }}>
-        <div className='bg-white p-12 h-min rounded-sm'>
+        <div className='bg-white p-12 h-min rounded-sm' id='quote-box'>
           <div className='w-[30vw] relative mb-16' style={{ color: this.state.RandomColor }}>
 
-            <p className='font-medium text-3xl mb-8'> <FontAwesomeIcon icon={faQuoteLeft} className='mr-2' />{quote.quote}</p>
-            <small className='absolute right-0 text-md text-md font-medium'>- {quote.author}</small>
+            <p className='font-medium text-3xl mb-8' id='text'> <FontAwesomeIcon icon={faQuoteLeft} className='mr-2' />{quote.quote}</p>
+            <small className='absolute right-0 text-md text-md font-medium' id='author'>- {quote.author}</small>
           </div>
           <div className='flex gap-2 mt-8 [&>*]:text-white'>
-            <button className='h-10 w-10 rounded-md' style={{ backgroundColor: this.state.RandomColor }}><FontAwesomeIcon icon={faTwitter} /></button>
-            <button className='h-10 w-10 rounded-md' style={{ backgroundColor: this.state.RandomColor }}><FontAwesomeIcon icon={faTumblr} /></button>
-            <button style={{ backgroundColor: this.state.RandomColor }} className='ml-auto px-4 rounded-md' onClick={this.handleClick.bind(this)}>New quote</button>
+            <a className='h-10 w-10 rounded-md flex items-center justify-center' id='tweet-quote' href={TwitterintentLink} style={{ backgroundColor: this.state.RandomColor }}><FontAwesomeIcon icon={faTwitter} /></a>
+            <a className='h-10 w-10 rounded-md flex items-center justify-center' href={TumblrintentLink} style={{ backgroundColor: this.state.RandomColor }}><FontAwesomeIcon icon={faTumblr} /></a>
+            <button style={{ backgroundColor: this.state.RandomColor }} className='ml-auto px-4 rounded-md' onClick={this.handleClick.bind(this)} id='new-quote'>New quote</button>
           </div>
         </div>
       </div>
